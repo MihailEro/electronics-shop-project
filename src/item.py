@@ -1,3 +1,6 @@
+import csv
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -32,3 +35,32 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= Item.pay_rate
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, new_name):
+        if len(new_name) <= 10:
+            self.__name = new_name
+        else:
+            print('Длина наименования товара превышает 10 символов.')
+
+    @classmethod
+    def instantiate_from_csv(cls):
+        cls.all.clear()
+        with open('..\src\items.csv', encoding='cp1251', newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                cls(row['name'], row['price'], row['quantity'])
+
+    @staticmethod
+    def string_to_number(string):
+        return int(float(string))
+
+    def calculate_total_price(self):
+        return self.price * self.quantity
+
+    def apply_discount(self):
+        self.price *= self.pay_rate
