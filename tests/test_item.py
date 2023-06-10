@@ -39,3 +39,11 @@ def test_item_istantiate_from_csv(test_item):
 def test_string_to_number(test_item):
     assert test_item.string_to_number('1357') == 1357
     assert test_item.string_to_number('12.75') == 12
+
+
+def test_item_repr():
+    my_item = Item('компьютер', 100000, 15)
+    assert repr(my_item) == "Item('компьютер', 100000, 15)"
+def test_item_str():
+    my_item = Item('компьютер', 100000, 15)
+    assert  str(my_item) == 'компьютер'
