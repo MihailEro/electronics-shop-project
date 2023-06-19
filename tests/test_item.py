@@ -3,9 +3,14 @@ from src.item import Item
 
 import pytest
 
+from src.phone import Phone
 @pytest.fixture
 def test_item():
     return Item('phone', 100, 10)
+
+@pytest.fixture()
+def test_phone():
+    return Phone("nokia", 23000, 1, 2)
 
 
 def test_item_init(test_item):
@@ -47,3 +52,7 @@ def test_item_repr():
 def test_item_str():
     my_item = Item('компьютер', 100000, 15)
     assert  str(my_item) == 'компьютер'
+
+
+def test_item_add(test_item, test_phone):
+    assert test_item + test_phone == 11
