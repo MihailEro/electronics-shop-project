@@ -3,6 +3,8 @@ from src.item import Item
 
 import pytest
 
+from src.instantiatecsverror import InstantiateCSVError
+
 from src.phone import Phone
 @pytest.fixture
 def test_item():
@@ -56,3 +58,11 @@ def test_item_str():
 
 def test_item_add(test_item, test_phone):
     assert test_item + test_phone == 11
+
+def test_file_not_found(test_item):
+    with pytest.raises(FileNotFoundError):
+        test_item.instantiate_from_csv()
+
+def test_invalid_csv(test_item):
+    with pytest.raises(InstantiateCSVError):
+        test_item.instantiate_from_csv()
